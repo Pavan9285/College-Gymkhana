@@ -1,0 +1,89 @@
+<h1 class="text-center text-danger" style="font-family: 'Times New Roman', Times, serif">
+    Registration as new student!!
+</h1>
+<div class="text-center">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td> First Name</td>
+                    <td class="d-flex flex-column"><input type="text" placeholder="Enter first name"
+                            formControlName="firstname">
+                        <span *ngIf="firstname?.invalid && firstname?.touched" class="text-danger">first name field can
+                            not be empty</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Last Name</td>
+                    <td class="d-flex flex-column"><input type="text" placeholder="Enter last name"
+                            formControlName="lastname">
+                        <span *ngIf="lastname?.invalid && lastname?.touched" class="text-danger">last name field can not
+                            be empty</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Email</td>
+                    <td class="d-flex flex-column"><input type="email" placeholder="Enter email"
+                            formControlName="email">
+                        <span *ngIf="email?.errors?.required && email?.touched" class="text-danger">Email field can not
+                            be empty</span>
+                        <span *ngIf="email?.errors?.pattern && email?.touched" class="text-danger">Email is not
+                            valid</span>
+                        <span *ngIf="isEmailidAlreadyExist" class="text-danger">This emailId already exist please try
+                            again with another emailId.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Password</td>
+                    <td class="d-flex flex-column"> <input type="password" placeholder="Enter password"
+                            formControlName="password">
+                        <span *ngIf="password?.invalid && password?.touched" class="text-danger">Password field can not
+                            be empty</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td class="d-flex flex-column"> <input type="password" placeholder="Enter confirm password"
+                            formControlName="confirmpassword">
+                        <span *ngIf="confirmpassword?.invalid && confirmpassword?.touched" class="text-danger">confirm
+                            password
+                            field can not be empty</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Class </td>
+                    <td class="d-flex flex-column"><input type="text" placeholder="Enter class" formControlName="class">
+                        <span *ngIf="class?.invalid && class?.touched" class="text-danger">class field can not be
+                            empty</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Control Id</td>
+                    <td class="d-flex flex-column"><input type="number" placeholder="Enter Control Id"
+                            formControlName="controlid">
+                        <span *ngIf="controlid?.invalid && controlid?.touched" class="text-danger">Control Id field can
+                            not be empty</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Stream</td>
+                    <td class="d-flex flex-column"><input type="text" placeholder="Enter Stream"
+                            formControlName="stream">
+                        <span *ngIf="stream?.invalid && stream?.touched" class="text-danger">Stream field can not be
+                            empty</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Roll No</td>
+                    <td class="d-flex flex-column"><input type="text" placeholder="Enter Roll No"
+                            formControlName="rollno">
+                        <span *ngIf="rollno?.invalid && rollno?.touched" class="text-danger">Roll No field can not be
+                            empty</span>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn btn-success ngSubmit m-2" type="submit"
+                [disabled]="registerForm?.invalid">REGISTER</button>
+        </div>
+    </form>
+</div>

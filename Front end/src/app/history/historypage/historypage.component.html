@@ -1,0 +1,34 @@
+<h1 class="text-danger text-center " style="font-family: 'Times New Roman', Times, serif">History/Achievament</h1>
+<button class="btn btn-outline-success" routerLink="add-history" routerLinkActive="active">Add History</button>
+
+<div class="text-center">
+    <form [formGroup]="getHistorysForm">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td><label for="game">Choose a Game:</label></td>
+                    <td class="d-flex flex-column">
+                        <select formControlName="addgameId" (change)="onChangeGame($event)">
+                            <option *ngFor="let game of gameList" [value]="game?.id">
+                                {{game.game}}</option>
+                        </select>
+                </tr>
+                <tr>
+                    <th>ItemHistory name</th>
+                    <th>Place</th>
+                    <th>date</th>
+                    <th>Details</th>
+                </tr>
+                <tbody formArrayName="itemshistory">
+                    <tr [formGroup]="itemhistory" *ngFor="let itemhistory of itemshistory?.controls; let i=index">
+                        <td><label>{{itemhistory.controls['name'].value }}</label>
+                            <input class="table-input d-none" type="text" formControlName="itemhistoryId"></td>
+                        <td> <input class="table-input" type="text" formControlName="place" readonly> </td>
+                        <td><input class="table-input" type="text" formControlName="date" readonly> </td>
+                        <td><textarea name="details" id="details" cols="30" rows="15" formControlName="details" readonly></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>

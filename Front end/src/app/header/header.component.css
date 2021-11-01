@@ -1,0 +1,17 @@
+#div3 {
+     text-align: left;
+    color: #e6491d;
+    font-family: 'Times New Roman', Times, serif; 
+    font: outline;
+    font-size: 4em;
+    }
+
+#div2{
+    padding-left :10px; 
+    font-family: 'Times New Roman', Times, serif;
+    font: outline; 
+    font-size: 20px;
+    padding-top: 1%;
+    /* background-color: grey;  */
+    overflow: hidden;
+}

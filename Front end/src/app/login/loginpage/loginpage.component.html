@@ -1,0 +1,30 @@
+<h2 class="text-center text-danger m-auto p-3" style="font-family: 'Times New Roman', Times, serif">
+    USER LOGIN
+</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
+    <div class="form-group text-center">
+        <small *ngIf="isUsernameOrPasswordInCorrect" class="text-danger">Username or password is incorrect</small>
+        <table class="table table-bordered table-dark  w-75 m-auto">
+            <tr>
+                <td> Email</td>
+                <td class="d-flex flex-column"><input type="email" placeholder="Enter email"
+                        formControlName="email">
+                    <span *ngIf="email?.errors?.required && email?.touched" class="text-danger">Email field can not
+                        be empty</span>
+                    <span *ngIf="email?.errors?.pattern && email?.touched" class="text-danger">Email is not valid</span>
+                </td>
+            </tr>
+            <tr>
+                <td> Password</td>
+                <td class="d-flex flex-column"> <input type="password" placeholder="Enter password"
+                        formControlName="password">
+                    <span *ngIf="password?.invalid && password?.touched" class="text-danger">Password field can not
+                        be empty</span>
+                </td>
+            </tr>
+        </table>
+        <button class="btn btn-success ngSubmit m-2" type="submit" [disabled]="loginForm?.invalid">LOGIN</button>
+        <button class="btn btn-warning m-2" type="reset">Forgot Password</button><br><br>
+        <a routerLink="/register">Create New Account</a>
+    </div>
+</form>

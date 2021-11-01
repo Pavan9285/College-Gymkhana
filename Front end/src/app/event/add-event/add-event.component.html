@@ -1,0 +1,111 @@
+<button class="btn btn-outline-success" routerLink="/event">Back to event page</button>
+
+<h1 class="text-center text-warning">
+    Update Event
+</h1>
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addevent">
+    Add Event
+</button>
+
+<div class="modal fade" id="addevent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <form [formGroup]="eventForm" (ngSubmit)="submitEvent()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add the Event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Event name<input type="text" formControlName="event">
+                    <span class="text-success">{{message}}</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addinformation">
+    Add information
+</button>
+
+<form [formGroup]="informationForm" (ngSubmit)="submitInformation()">
+    <div class="modal fade" id="addinformation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add the Event Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5> Select Event:</h5>
+                    <select formControlName="eventId">
+                        <option *ngFor="let event of eventList" [value]="event?.id">
+                            {{event.event}}</option>
+                    </select>
+                    Event information<input type="text" formControlName="information">
+                    <span class="text-success">{{message}}</span>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<br>
+<br>
+
+<div class="text-center">
+    <form [formGroup]="addEventsForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td colspan="3"><label for="game">Choose a Event:</label></td>
+                    <td class="d-flex flex-column">
+                        <select formControlName="addeventId" (change)="onChangeEvent($event)">
+                            <option *ngFor="let event of eventList" [value]="event?.id">
+                                {{event.event}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Event name</th>
+                    <th>Timing of Event</th>
+                    <th>Place of event</th>
+                    <th>Fee of the Event</th>
+                    <th>Prize of the event</th>
+                    <th>Details of the Event</th>
+                </tr>
+                <tbody formArrayName="informations">
+                    <tr [formGroup]="information" *ngFor="let information of informations?.controls; let i=index">
+                        <td><label>{{information.controls['name'].value }}</label>
+                            <input class="table-input d-none" type="text" formControlName="informationId"></td>
+                        <td> <input class="table-input" type="text" formControlName="timing"> </td>
+                        <td><input class="table-input" type="text" formControlName="place"> </td>
+                        <td> <input class="table-input" type="text" formControlName="fee"> </td>
+                        <td><input class="table-input" type="text" formControlName="prize"> </td>
+                        <td><input class="table-input" type="text" formControlName="details"> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success ngSubmit m-2" type="submit" id="updateEvents"
+                [disabled]="addEventsForm?.invalid">Update Events</button>
+        </div>
+    </form>
+</div>

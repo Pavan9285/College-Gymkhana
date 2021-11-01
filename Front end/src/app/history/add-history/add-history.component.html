@@ -1,0 +1,76 @@
+<button class="btn btn-outline-success" routerLink="/history">Back to History Page</button>
+
+<h1 class="text-center text-warning">
+    Update History
+</h1>
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#additemhistory">
+    Add Itemhistory
+</button>
+
+<form [formGroup]="itemhistoryForm" (ngSubmit)="submitItemhistory()">
+    <div class="modal fade" id="additemhistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add the Game Item History</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5> Select Game:</h5>
+                    <select formControlName="gameId">
+                        <option *ngFor="let game of gameList" [value]="game?.id">
+                            {{game.game}}</option>
+                    </select>
+                    Game item history<input type="text" formControlName="itemshistory">
+                    <span class="text-success">{{message}}</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<br>
+<br>
+
+<div class="text-center">
+    <form [formGroup]="addHistorysForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td><label for="game">Choose a Game:</label></td>
+                    <td class="d-flex flex-column">
+                        <select formControlName="addgameId" (change)="onChangeGame($event)">
+                            <option *ngFor="let game of gameList" [value]="game?.id">
+                                {{game.game}}</option>
+                        </select>
+                </tr>
+                <tr>
+                    <th>ItemHistory name</th>
+                    <th>Place</th>
+                    <th>date</th>
+                    <th>Details</th>
+                </tr>
+                <tbody formArrayName="itemshistory">
+                    <tr [formGroup]="itemhistory" *ngFor="let itemhistory of itemshistory?.controls; let i=index">
+                        <td><label>{{itemhistory.controls['name'].value }}</label>
+                            <input class="table-input d-none" type="text" formControlName="itemhistoryId"></td>
+                        <td> <input class="table-input" type="text" formControlName="place"> </td>
+                        <td><input class="table-input" type="date" formControlName="date" > </td>
+                        <td><textarea name="details" id="details" cols="30" rows="15" formControlName="details"></textarea></td>
+                        <!-- <td><input class="table-input" type="text" formControlName="details"> </td> -->
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success ngSubmit m-2" type="submit"
+                [disabled]="addHistorysForm?.invalid">Update History</button>
+        </div>
+    </form>
+</div>

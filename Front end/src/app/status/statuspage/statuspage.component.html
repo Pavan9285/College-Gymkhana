@@ -1,0 +1,41 @@
+<div class="text-center" style="font-family: 'Times New Roman', Times, serif">
+    <h2 class="text-danger m-auto p-3">
+        Gymkahana available for use or not!!
+    </h2>
+    <table class="table table-bordered table-dark  w-75 m-auto">
+        <tr>
+            <td>Gym room</td>
+            <td>
+                <input type="text" id="text1">
+            </td>
+            <td><button type="button" (click)="changeStatusgym()">Change</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Gymkhana available for student</td>
+            <td>
+                <input type="text" id="text2">
+            </td>
+            <td>
+                <button type="button" (click)="changeStatus1()">Change</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Gymkhana available for staff</td>
+            <td>
+                <input type="text" id="text3">
+            </td>
+            <td>
+                <button type="button" (click)="changeStatus2()">Change</button>
+            </td>
+        </tr>
+    </table><br><br>
+   <h4> <span class="text-info">
+        <span class="text-success">GREEN </span>color indicates <span class="text-success">AVAILABLE
+        </span>.</span><br><br>
+<span class="text-info">
+    <span class="text-danger">RED </span>color indicates<span class="text-danger"> NOT AVAILABLE</span>.
+</span>
+</h4>
+
+</div>

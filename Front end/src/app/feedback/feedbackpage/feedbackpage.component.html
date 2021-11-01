@@ -1,0 +1,73 @@
+<h1 class="text-danger text-center " style="font-family: 'Times New Roman', Times, serif">Provide Your Valuable Feedback
+</h1>
+
+
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addfeedback">
+    Add Feedback
+</button>
+
+<form [formGroup]="feedbackForm" (ngSubmit)="submitfeedback()">
+    <div class="modal fade" id="addfeedback" tabindex="-1" role="dialog" aria-labelledby="Feedback" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="Feedback">Add the Feedback</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="text-center text-primary" style="font-family: 'Times New Roman', Times, serif">Feedback
+                        for vazeGymkhana</h2>
+                    <textarea name="feedbackvazeGymkhana" id="feedbackvazeGymkhana" cols="50" rows="5"
+                        formControlName="feedbackvazeGymkhana" class="border border-primary rounded-top"></textarea>
+                    <span class="text-success">{{message}}</span>
+                    <h2 class="text-center text-primary" style="font-family: 'Times New Roman', Times, serif">Feedback
+                        or any change in website</h2>
+                    <textarea name="feedbackwebsite" id="feedbackwebsite" cols="50" rows="5"
+                        formControlName="feedbackwebsite" class="border border-primary rounded-top"></textarea>
+                    <span class="text-success">{{message}}</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<div class="text-center">
+    <form [formGroup]="getFeedbackForm" (ngSubmit)="getfeedback()">
+        <div class="form-group">
+            <button class="btn btn-primary ngSubmit m-2" type="submit">Get Feedback</button>
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <th>vazeGymkhana Feedback</th>
+                    <th>Website Feedback</th>
+                    <th>Action</th>
+                </tr>
+                <tbody>
+                    <tr *ngFor = "let feedback of feed">
+                        <td>
+                            <textarea class="table-input" name="feedbackvazeGymkhana" id="feedbackvazeGymkhana" cols="50" rows="5" readonly>
+                                {{feedback.feedbackvazeGymkhana}}
+                            </textarea>
+                        </td>
+                        <td>
+                            <textarea class="table-input" name="feedbackwebsite" id="feedbackwebsite" cols="50" rows="5" readonly>
+                                {{feedback.feedbackwebsite}}
+                            </textarea>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-danger" (click)="deleteFeedback(feedback.id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>

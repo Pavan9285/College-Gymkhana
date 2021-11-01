@@ -1,0 +1,103 @@
+<button class="btn btn-outline-success" routerLink="/timetable" >Back to timetable page</button>
+
+<h1 class="text-center text-warning">
+    Update Timetable
+</h1>
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#adddegree">
+    Add Degree
+</button>
+
+<div class="modal fade" id="adddegree" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form [formGroup]="degreeForm" (ngSubmit)="submitDegree()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add the Degree</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Degree name<input type="text" formControlName="degree">
+                    <span class="text-success">{{message}}</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addclass">
+    Add class
+</button>
+
+<form [formGroup]="classForm" (ngSubmit)="submitClass()">
+    <div class="modal fade" id="addclass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add the Degree class</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5> Select Degree:</h5>
+                    <select formControlName="degreeId">
+                        <option *ngFor="let degree of degreeList" [value]="degree?.id">
+                            {{degree.degree}}</option>
+                    </select>
+                    Degree class<input type="text" formControlName="class">
+                    <span class="text-success">{{message}}</span>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<br>
+<br>
+
+<div class="text-center">
+    <form [formGroup]="addTimetableForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td><label for="degree">Choose a Degree:</label></td>
+                    <td class="d-flex flex-column">
+                        <select formControlName="adddegreeId" (change)="onChangeDegree($event)">
+                            <option *ngFor="let degree of degreeList" [value]="degree?.id">
+                                {{degree.degree}}</option>
+                        </select>
+                </tr>
+                <tr>
+                    <th>class name</th>
+                    <th>Opening Time</th>
+                    <th>Closing Time</th>
+                </tr>
+                <tbody formArrayName="classes">
+                    <tr [formGroup]="class" *ngFor="let class of classes?.controls; let i=index">
+                        <td><label>{{class.controls['name'].value }}</label>
+                            <input class="table-input d-none" type="text" formControlName="classId"></td>
+                        <td> <input class="table-input" type="text" formControlName="opening_time"> </td>
+                        <td><input class="table-input" type="text" formControlName="closing_time"> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success ngSubmit m-2" type="submit" id="updateTimetable"
+                [disabled]="addTimetableForm?.invalid">Update Timetable</button>
+        </div>
+    </form>
+</div>

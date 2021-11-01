@@ -1,0 +1,31 @@
+<button class="btn btn-outline-success" routerLink="add-inventory" routerLinkActive="active">Add Inventory</button>
+
+<div class="text-center">
+    <form [formGroup]="getInventoryForm">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td><label for="game">Choose a Game:</label></td>
+                    <td class="d-flex flex-column">
+                        <select formControlName="addgameId" (change)="onChangeGame($event)">
+                            <option *ngFor="let game of gameList" [value]="game?.id">
+                                {{game.game}}</option>
+                        </select>
+                </tr>
+                <tr>
+                    <th>item name</th>
+                    <th>Total number of item</th>
+                    <th>Total number of available item</th>
+                </tr>
+                <tbody formArrayName="items">
+                    <tr [formGroup]="item" *ngFor="let item of items?.controls; let i=index">
+                        <td><label>{{item.controls['name'].value }}</label>
+                            <input class="table-input d-none" type="text" formControlName="itemId"></td>
+                        <td> <input class="table-input" type="text" formControlName="total_quantity" readonly> </td>
+                        <td><input class="table-input" type="text" formControlName="available_quantity" readonly> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>

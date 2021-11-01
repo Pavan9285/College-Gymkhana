@@ -1,0 +1,32 @@
+<button class="btn btn-outline-success" routerLink="add-timetable" routerLinkActive="active">Add Timetable</button>
+
+<div class="text-center">
+    <form [formGroup]="getTimetableForm">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td><label for="degree">Choose a degree:</label></td>
+                    <td class="d-flex flex-column">
+                        <select formControlName="adddegreeId" (change)="onChangeGame($event)">
+                            <option *ngFor="let degree of degreeList" [value]="degree?.id">
+                                {{degree.degree}}</option>
+                        </select>
+                </tr>
+                <tr>
+                    <th>Class name</th>
+                    <th>Opening time</th>
+                    <th>Closing time</th>
+                </tr>
+                <tbody formArrayName="classes">
+                    <tr [formGroup]="class" *ngFor="let class of classes?.controls; let i=index">
+                        <td><label>{{class.controls['name'].value }}</label>
+                            <input class="table-input d-none" type="text" formControlName="classId"></td>
+                        <td> <input class="table-input" type="text" formControlName="opening_time" readonly> </td>
+                        <td><input class="table-input" type="text" formControlName="closing_time" readonly> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+

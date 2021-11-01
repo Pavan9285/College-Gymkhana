@@ -1,0 +1,40 @@
+<h1 class="text-danger text-center " style="font-family: 'Times New Roman', Times, serif">All about vaze sports events</h1>
+<button class="btn btn-outline-success" routerLink="add-event" routerLinkActive="active">Add Event</button>
+
+<div class="text-center">
+    <form [formGroup]="getEventsForm">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td colspan="3"><label for="game">Choose a Event/Game:</label></td>
+                    <td class="d-flex flex-column">
+                        <select formControlName="addeventId" (change)="onChangeEvent($event)">
+                            <option *ngFor="let event of eventList" [value]="event?.id">
+                                {{event.event}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Event name</th>
+                    <th>Timing of Event</th>
+                    <th>Place of event</th>
+                    <th>Fee of the Event</th>
+                    <th>Prize of the event</th>
+                    <th>Details of the Event</th>
+                </tr>
+                <tbody formArrayName="informations">
+                    <tr [formGroup]="information" *ngFor="let information of informations?.controls; let i=index">
+                        <td><label>{{information.controls['name'].value }}</label>
+                            <input class="table-input d-none" type="text" formControlName="informationId"></td>
+                        <td> <input class="table-input" type="text" formControlName="timing" readonly> </td>
+                        <td><input class="table-input" type="text" formControlName="place" readonly> </td>
+                        <td> <input class="table-input" type="text" formControlName="fee" readonly> </td>
+                        <td><input class="table-input" type="text" formControlName="prize" readonly> </td>
+                        <td><input class="table-input" type="text" formControlName="details" readonly> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+

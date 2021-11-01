@@ -1,0 +1,103 @@
+<button class="btn btn-outline-success" routerLink="/inventory" routerLinkActive="active">Back to inventory page</button>
+
+<h1 class="text-center text-warning">
+    Update Inventory
+</h1>
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#addgame">
+    Add Game
+</button>
+
+<div class="modal fade" id="addgame" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form [formGroup]="gameForm" (ngSubmit)="submitGame()">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add the Game</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Game name<input type="text" formControlName="game">
+                    <span class="text-success">{{message}}</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#additem">
+    Add item
+</button>
+
+<form [formGroup]="itemForm" (ngSubmit)="submitItem()">
+    <div class="modal fade" id="additem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add the Game Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5> Select Game:</h5>
+                    <select formControlName="gameId">
+                        <option *ngFor="let game of gameList" [value]="game?.id">
+                            {{game.game}}</option>
+                    </select>
+                    Game item<input type="text" formControlName="item">
+                    <span class="text-success">{{message}}</span>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<br>
+<br>
+
+<div class="text-center">
+    <form [formGroup]="addInventoryForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <table class="table table-bordered table-dark w-75 m-auto">
+                <tr>
+                    <td><label for="game">Choose a Game:</label></td>
+                    <td class="d-flex flex-column">
+                        <select formControlName="addgameId" (change)="onChangeGame($event)">
+                            <option *ngFor="let game of gameList" [value]="game?.id">
+                                {{game.game}}</option>
+                        </select>
+                </tr>
+                <tr>
+                    <th>item name</th>
+                    <th>Total number of item</th>
+                    <th>Total number of available item</th>
+                </tr>
+                <tbody formArrayName="items">
+                    <tr [formGroup]="item" *ngFor="let item of items?.controls; let i=index">
+                        <td><label>{{item.controls['name'].value }}</label>
+                            <input class="table-input d-none" type="text" formControlName="itemId"></td>
+                        <td> <input class="table-input" type="text" formControlName="total_quantity"> </td>
+                        <td><input class="table-input" type="text" formControlName="available_quantity"> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-success ngSubmit m-2" type="submit" id="updateInventory"
+                [disabled]="addInventoryForm?.invalid">Update Inventory</button>
+        </div>
+    </form>
+</div>
